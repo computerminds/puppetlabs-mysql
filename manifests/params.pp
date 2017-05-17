@@ -186,7 +186,10 @@ class mysql::params {
       }
 
       $basedir                 = '/usr'
-      $config_file             = '/etc/mysql/my.cnf'
+      $config_file             = $::lsbdistcodename ? {
+        'xenial'               => '/etc/mysql/mysql.conf.d/mysqld.cnf',
+        default                => '/etc/mysql/my.cnf',
+      }
       $includedir              = '/etc/mysql/conf.d'
       $datadir                 = '/var/lib/mysql'
       $log_error               = '/var/log/mysql/error.log'
